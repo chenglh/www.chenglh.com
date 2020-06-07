@@ -10,7 +10,8 @@ namespace App\Http\Controller\Manager;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
 use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
 use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
-// use Swoft\Http\Message\Response;
+use Swoft\Http\Message\Request;
+use Swoft\Http\Message\Response;
 
 /**
  * Class AccountController
@@ -19,6 +20,13 @@ use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
  * @package App\Http\Controller\Manager
  */
 class AccountController{
+	/**
+	 * @RequestMapping(route="/v1/login")
+	 * @return array
+	 */
+	public function login(Request $request, Response $response): Response {
+		return ['item0', 'item1'];
+	}
     /**
      * Get data list. access uri path: /account
      * @RequestMapping(route="/account", method=RequestMethod::GET)
