@@ -239,6 +239,109 @@
         ]
     },
     {
+        "name": "easyswoole/spl",
+        "version": "1.3.7",
+        "version_normalized": "1.3.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/easy-swoole/spl.git",
+            "reference": "b9d74dfbeb59086c51616ba09d7728cea7351d05"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/easy-swoole/spl/zipball/b9d74dfbeb59086c51616ba09d7728cea7351d05",
+            "reference": "b9d74dfbeb59086c51616ba09d7728cea7351d05",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "ext-json": "*",
+            "php": ">=7.1.0"
+        },
+        "require-dev": {
+            "easyswoole/phpunit": "^1.0",
+            "easyswoole/swoole-ide-helper": "^1.0"
+        },
+        "time": "2020-04-05T15:50:30+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "EasySwoole\\Spl\\": "src/",
+                "EasySwoole\\Spl\\Test\\": "test/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "YF",
+                "email": "291323003@qq.com"
+            }
+        ],
+        "description": "php stander lib",
+        "homepage": "https://www.easyswoole.com/",
+        "keywords": [
+            "async",
+            "easyswoole",
+            "framework",
+            "swoole"
+        ]
+    },
+    {
+        "name": "easyswoole/verifycode",
+        "version": "3.0.1",
+        "version_normalized": "3.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/easy-swoole/verifyCode.git",
+            "reference": "7565c70f11290e3119b8c47b756af6f11b67a2ca"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/easy-swoole/verifyCode/zipball/7565c70f11290e3119b8c47b756af6f11b67a2ca",
+            "reference": "7565c70f11290e3119b8c47b756af6f11b67a2ca",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "easyswoole/spl": "^1.0",
+            "ext-gd": "*",
+            "php": ">=7.1"
+        },
+        "time": "2019-06-03T07:27:54+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "EasySwoole\\VerifyCode\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "evalor",
+                "email": "mipone@foxmail.com"
+            },
+            {
+                "name": "YF",
+                "email": "291323003@qq.com"
+            }
+        ]
+    },
+    {
         "name": "monolog/monolog",
         "version": "1.25.4",
         "version_normalized": "1.25.4.0",

@@ -100,6 +100,12 @@ class ComposerStaticInit75322946a801c0228434ecc5a374661e
         array (
             'Leuffen\\TextTemplate\\' => 21,
         ),
+        'E' => 
+        array (
+            'EasySwoole\\VerifyCode\\' => 22,
+            'EasySwoole\\Spl\\Test\\' => 20,
+            'EasySwoole\\Spl\\' => 15,
+        ),
         'D' => 
         array (
             'Dotenv\\' => 7,
@@ -360,6 +366,18 @@ class ComposerStaticInit75322946a801c0228434ecc5a374661e
         'Leuffen\\TextTemplate\\' => 
         array (
             0 => __DIR__ . '/..' . '/text/template/src',
+        ),
+        'EasySwoole\\VerifyCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/easyswoole/verifycode/src',
+        ),
+        'EasySwoole\\Spl\\Test\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/easyswoole/spl/test',
+        ),
+        'EasySwoole\\Spl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/easyswoole/spl/src',
         ),
         'Dotenv\\' => 
         array (

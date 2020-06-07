@@ -62,7 +62,7 @@ return [
     'httpDispatcher'     => [
         // Add global http middleware
         'middlewares'      => [
-            //\App\Http\Middleware\FavIconMiddleware::class,
+            \App\Http\Middleware\FavIconMiddleware::class,
             \Swoft\Http\Session\SessionMiddleware::class,
             // \Swoft\Whoops\WhoopsMiddleware::class,
             // Allow use @View tag
