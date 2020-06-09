@@ -7,5 +7,6 @@ namespace App\Constant;
  */
 class ExceptionMsg
 {
-	const ERROR_CAPTCHA = '验证码不正确';
+	const ERR_LOGIN_TIME = '10';
+	const ERR_LOGIN_LIMIT = '当前账号已经被锁';
 }

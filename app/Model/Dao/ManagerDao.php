@@ -21,7 +21,7 @@ class ManagerDao
 	 * @return mixed
 	 */
 	public function getManagerByMobile(string $mobile){
-		return Manager::where(['mobile'=>$mobile])->find();
+		return Manager::where('mobile',$mobile)->first();
 	}
 
 	/**
@@ -30,6 +30,6 @@ class ManagerDao
 	 * @return mixed
 	 */
 	public function getManagerById(string $id){
-		return User::findOne(['manager_id'=>$id])->getResult();
+		return Manager::find($id);
 	}
 }

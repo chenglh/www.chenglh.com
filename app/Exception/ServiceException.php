@@ -12,8 +12,8 @@
 
 namespace App\Exception;
 
+use Exception;
 
-class ServiceException extends \Exception
+class ServiceException extends Exception
 {
-
 }

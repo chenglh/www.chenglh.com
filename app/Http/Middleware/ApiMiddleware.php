@@ -42,11 +42,7 @@ class ApiMiddleware implements MiddlewareInterface
 			$response = context::get()->getResponse();
 			return $this->configResponse($response);
         }
-
-        // before request handle
-
 		$response = $handler->handle($request);
-
 		return $this->configResponse($response);
     }
 

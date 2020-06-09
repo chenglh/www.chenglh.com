@@ -115,9 +115,19 @@ return [
         'port'     => 6379,
         'database' => 0,
         'option'   => [
-            'prefix' => 'swoft:'
+            'prefix' => 'hx:',
+			'serializer' => 0 //不需要序列化
         ]
     ],
+	'redis.pool' => [
+		'class'       => Swoft\Redis\Pool::class,
+		'redisDb'     => bean('redis'),
+		'minActive'   => 10,
+		'maxActive'   => 20,
+		'maxWait'     => 0,
+		'maxWaitTime' => 0,
+		'maxIdleTime' => 60,
+	],
     'user'               => [
         'class'   => ServiceClient::class,
         'host'    => '127.0.0.1',

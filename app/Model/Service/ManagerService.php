@@ -6,7 +6,10 @@
  */
 namespace App\Model\Service;
 
+use App\Exception\ServiceException;
 use App\Model\Dao\ManagerDao;
+use App\Model\Entity\Manager;
+use Firebase\JWT\JWT;
 use Swoft\Bean\Annotation\Mapping\Bean;
 use Swoft\Bean\Annotation\Mapping\Inject;
 
@@ -18,8 +21,7 @@ class ManagerService
 {
 	/**
 	 * @Inject()
-	 * @var ManagerDao
-	 * @var ManagerDao $manager
+	 * @var ManagerDao \App\Model\Dao\ManagerDao
 	 */
 	private $managerDao;
 
@@ -49,11 +51,13 @@ class ManagerService
 		if (!$manager) {
 			throw new ServiceException('该用户未注册');
 		}
-		if ($password != $manager->getPasswd()) {
+		if ($manager->getPassword() != getHashPassword($password, $manager->getPasswordSalt())) {
 			throw new ServiceException('账号或密码错误');
 		}
-
-		return $this->getTokenByUserId($manager->getId());
+		if ($manager->getLoginStatus() == 2) {
+			throw new ServiceException('该用户已注消');
+		}
+		return $this->getTokenByManagerId($manager->getManagerId());
 	}
 
 	/**
@@ -63,7 +67,24 @@ class ManagerService
 	 */
 	public function getManagerByMobile(string $mobile)
 	{
-		/** @var managerDao $manager */
 		return $this->managerDao->getManagerByMobile($mobile);
+	}
+
+	/**
+	 * 生成Token
+	 * @param int $id
+	 * @return String
+	 */
+	public function getTokenByManagerId($id)
+	{
+		//登陆成功使用jwt返回token
+		$private = \config('jwt.privateKey');
+		$type = \config('jwt.type');
+
+		$tokenParam = [
+			'manager_id' => $id,// 用户id
+			'iat' => time(),// 创建时间
+		];
+		return JWT::encode($tokenParam, $private, $type);
 	}
 }

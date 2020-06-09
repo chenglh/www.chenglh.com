@@ -8,6 +8,7 @@ namespace App\Http\Controller\Manager;
 
 use App\Model\Logic\ManagerLogic;
 use App\Model\Service\ManagerService;
+use App\Utils\Message;
 use Swoft\Bean\Annotation\Mapping\Inject;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
 use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
@@ -41,18 +42,18 @@ class AccountController{
 	{
 		$post = $request->post();
 		$this->managerLogic->login($post);
-		print_r($post);
-		return [];
-		$token = $this->managerService->login($post['mobile'], $post['password']);
+		$token = $this->managerService->login($post['username'], $post['password']);
+		return Message::success('success',Message::CODE_SUCCESS,['token'=>$token]);
 	}
     /**
      * Get data list. access uri path: /account
      * @RequestMapping(route="/account", method=RequestMethod::GET)
      * @return array
      */
-    public function index(): array
+    public function index(Request $request): array
     {
-        return ['item0', 'item1'];
+        print_r($request);
+        return [];
     }
 
     /**
