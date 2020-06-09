@@ -1,5 +1,4 @@
 <?php
-
 $envVal = env('WAREHOUSE_CODE');
 
 return [
@@ -7,5 +6,5 @@ return [
     // 'warehouseCode' => ['a', 'b'],
     'warehouseCode' => $envVal ? explode(',', $envVal) : [],
 
-	'website' => 'http://www.layuiadmin.com',
+	'website' => 'http://www.tladmin.com',
 ];

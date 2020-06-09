@@ -4,9 +4,11 @@
  * @Author：chenglh
  * @Time：2020-06-07
  */
-
 namespace App\Http\Controller\Manager;
 
+use App\Model\Logic\ManagerLogic;
+use App\Model\Service\ManagerService;
+use Swoft\Bean\Annotation\Mapping\Inject;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
 use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
 use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
@@ -21,11 +23,27 @@ use Swoft\Http\Message\Response;
  */
 class AccountController{
 	/**
+	 * @Inject()
+	 * @var managerLogic \App\Model\Logic\ManagerLogic
+	 */
+	private $managerLogic;
+
+	/**
+	 * @Inject()
+	 * @var managerService \App\Model\Service\ManagerService
+	 */
+	private $managerService;
+	/**
 	 * @RequestMapping(route="/v1/login")
 	 * @return array
 	 */
-	public function login(Request $request, Response $response): Response {
-		return ['item0', 'item1'];
+	public function login(Request $request, Response $response): array
+	{
+		$post = $request->post();
+		$this->managerLogic->login($post);
+		print_r($post);
+		return [];
+		$token = $this->managerService->login($post['mobile'], $post['password']);
 	}
     /**
      * Get data list. access uri path: /account
