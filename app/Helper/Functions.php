@@ -90,3 +90,16 @@ function getHashPassword($password, $salt):string {
 }
 
 /** 实现业务级别 */
+
+/**
+ * @param bool $substr  是否截取
+ * @return array|mixed|string
+ */
+function getRemoteAddr($substr = false) {
+	$remote_addr = Swoft\Context\Context::get()->getRequest()->server('remote_addr');
+	if ($substr == true) {
+		$remote_addr = substr($remote_addr, 0, -4);
+	}
+
+	return $remote_addr;
+}

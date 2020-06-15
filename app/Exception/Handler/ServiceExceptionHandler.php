@@ -13,13 +13,14 @@ use App\Utils\Message;
 use Swoft\Http\Message\ContentType;
 use Swoft\Http\Message\Response;
 use App\Exception\ServiceException;
+use App\Exception\ValidateException;
 use Swoft\Error\Annotation\Mapping\ExceptionHandler;
 use Swoft\Http\Server\Exception\Handler\AbstractHttpErrorHandler;
 use Throwable;
 
 /**
  * Class ServiceExceptionHandler
- * @ExceptionHandler(ServiceException::class)
+ * @ExceptionHandler({ServiceException::class,ValidateException::class})
  */
 class ServiceExceptionHandler extends AbstractHttpErrorHandler
 {

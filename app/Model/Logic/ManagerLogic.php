@@ -22,7 +22,7 @@ class ManagerLogic
 	 * @throws ValidateException
 	 */
 	public function login(array $data) {
-		if (getErrorValiCount($data['username']) >= ExceptionMsg::ERR_LOGIN_TIME) {
+		if (getErrorValiCount(getRemoteAddr(true)) >= ExceptionMsg::ERR_LOGIN_TIME) {
 			throw new ValidateException(ExceptionMsg::ERR_LOGIN_LIMIT);
 		}
 	}

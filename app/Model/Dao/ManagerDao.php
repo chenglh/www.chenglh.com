@@ -32,4 +32,6 @@ class ManagerDao
 	public function getManagerById(string $id){
 		return Manager::find($id);
 	}
+
+
 }
