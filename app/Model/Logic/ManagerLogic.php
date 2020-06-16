@@ -29,6 +29,7 @@ class ManagerLogic
 	}
 
 	public function checkStatus(int $id) {
+
         if ($state == 1) {
             throw new ValidationException(ExceptionMsg::ERR_LOGINSTATE);
         }

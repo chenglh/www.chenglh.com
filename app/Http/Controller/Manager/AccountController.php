@@ -34,6 +34,7 @@ class AccountController{
 	 * @var managerService \App\Model\Service\ManagerService
 	 */
 	private $managerService;
+
 	/**
 	 * @RequestMapping(route="/v1/login")
 	 * @return array

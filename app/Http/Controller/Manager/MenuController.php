@@ -27,6 +27,11 @@ use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
  */
 class MenuController{
 
+    /**
+     * @var
+     */
+    private $managerDao;
+
 //    private $managerMenu
     /**
      * 用户菜单列表

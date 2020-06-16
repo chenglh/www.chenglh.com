@@ -19,13 +19,13 @@ use Swoft\Http\Message\Response;
 /**
  * Class ManagersController
  *
- * @Controller(prefix="/managers")
+ * @Controller(prefix="/manager")
  * @package App\Http\Controller\Manager
  */
-class ManagersController{
+class ManagerController{
     /**
-     * Get data list. access uri path: /managers
-     * @RequestMapping(route="/managers", method=RequestMethod::GET)
+     * Get data list. access uri path: /manager
+     * @RequestMapping(route="/manager", method=RequestMethod::GET)
      * @return array
      */
     public function index(): array
@@ -34,7 +34,7 @@ class ManagersController{
     }
 
     /**
-     * Get one by ID. access uri path: /managers/{id}
+     * Get one by ID. access uri path: /manager/{id}
      * @RequestMapping(route="{id}", method=RequestMethod::GET)
      * @return array
      */
@@ -44,7 +44,7 @@ class ManagersController{
     }
 
     /**
-     * Create a new record. access uri path: /managers
+     * Create a new record. access uri path: /manager
      * @RequestMapping(route="/managers", method=RequestMethod::POST)
      * @return array
      */
@@ -54,7 +54,7 @@ class ManagersController{
     }
 
     /**
-     * Update one by ID. access uri path: /managers/{id}
+     * Update one by ID. access uri path: /manager/{id}
      * @RequestMapping(route="{id}", method=RequestMethod::PUT)
      * @return array
      */
@@ -64,7 +64,7 @@ class ManagersController{
     }
 
     /**
-     * Delete one by ID. access uri path: /managers/{id}
+     * Delete one by ID. access uri path: /manager/{id}
      * @RequestMapping(route="{id}", method=RequestMethod::DELETE)
      * @return array
      */
