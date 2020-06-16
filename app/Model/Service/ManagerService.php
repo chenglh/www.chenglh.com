@@ -87,8 +87,10 @@ class ManagerService
 		$type = \config('jwt.type');
 
 		$tokenParam = [
-			'manager_id' => $id,// 用户id
 			'iat' => time(),// 创建时间
+			'user' => [
+				'user_id' => $id,// 用户id
+			]
 		];
 		return JWT::encode($tokenParam, $private, $type);
 	}
