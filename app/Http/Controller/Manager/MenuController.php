@@ -10,21 +10,40 @@
 
 namespace App\Http\Controller\Manager;
 
+use App\Http\Middleware\AuthMiddleware;
+use Swoft\Http\Message\Request;
+use Swoft\Http\Message\Response;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
+use Swoft\Http\Server\Annotation\Mapping\Middleware;
 use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
 use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
-// use Swoft\Http\Message\Response;
 
 /**
  * Class MenuController
  *
  * @Controller(prefix="/menu")
  * @package App\Http\Controller\Manager
+ * @Middleware(AuthMiddleware::class)
  */
 class MenuController{
+
+//    private $managerMenu
+    /**
+     * 用户菜单列表
+     * @RequestMapping(route="/menu",method=RequestMethod::GET})
+     * @return array
+     */
+    public function mlist(Request $request): array {
+        //$this->menuLogic->login($post);
+
+        //先判断这个人是否有问题，
+        //再查询角色
+        //再查询菜单
+    }
+
     /**
      * Get data list. access uri path: /menu
-     * @RequestMapping(route="/menu", method=RequestMethod::GET)
+     * @RequestMapping(route="index", method=RequestMethod::GET)
      * @return array
      */
     public function index(): array

@@ -8,6 +8,7 @@ namespace App\Model\Logic;
 
 use App\Constant\ExceptionMsg;
 use App\Exception\ValidateException;
+use Dotenv\Exception\ValidationException;
 use Swoft\Bean\Annotation\Mapping\Bean;
 
 /**
@@ -26,4 +27,10 @@ class ManagerLogic
 			throw new ValidateException(ExceptionMsg::ERR_LOGIN_LIMIT);
 		}
 	}
+
+	public function checkStatus(int $id) {
+        if ($state == 1) {
+            throw new ValidationException(ExceptionMsg::ERR_LOGINSTATE);
+        }
+    }
 }
