@@ -7,4 +7,5 @@ return [
     'warehouseCode' => $envVal ? explode(',', $envVal) : [],
 
 	'website' => 'http://www.tladmin.com',
+    'secret_salt' => '20200616XIYC',
 ];

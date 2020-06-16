@@ -115,7 +115,7 @@ return [
         'port'     => 6379,
         'database' => 0,
         'option'   => [
-            'prefix' => 'hx:',
+            'prefix' => '',
 			'serializer' => 0 //不需要序列化
         ]
     ],
