@@ -21,7 +21,7 @@ use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
 /**
  * Class MenuController
  *
- * @Controller(prefix="/menu")
+ * @Controller(prefix="/v1")
  * @package App\Http\Controller\Manager
  * @Middleware(AuthMiddleware::class)
  */
@@ -35,12 +35,11 @@ class MenuController{
 //    private $managerMenu
     /**
      * 用户菜单列表
-     * @RequestMapping(route="/menu",method=RequestMethod::GET})
+     * @RequestMapping(route="menu",method=RequestMethod::GET)
      * @return array
      */
     public function mlist(Request $request): array {
-        //$this->menuLogic->login($post);
-
+		return ['item0', 'item1'];
         //先判断这个人是否有问题，
         //再查询角色
         //再查询菜单

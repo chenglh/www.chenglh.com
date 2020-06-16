@@ -20,7 +20,7 @@ class ManagerDao
 	 * @param string $mobile
 	 * @return mixed
 	 */
-	public function getManagerByMobile(string $mobile){
+	public function getManagerByMobile(string $mobile) {
 		return Manager::where('mobile',$mobile)->first();
 	}
 
@@ -29,7 +29,7 @@ class ManagerDao
 	 * @param string $id
 	 * @return mixed
 	 */
-	public function getManagerById(string $id){
+	public function getManagerById(int $id) {
 		return Manager::find($id);
 	}
 

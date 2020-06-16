@@ -11,6 +11,7 @@ namespace App\Http\Middleware;
 
 use Firebase\JWT\JWT;
 use App\Utils\Message;
+use App\Model\Dao\ManagerDao;
 use Swoft\Http\Message\Request;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -46,8 +47,12 @@ class AuthMiddleware implements MiddlewareInterface
         $access_token = $request->getHeaderLine('access_token');
         try {
             $auth = JWT::decode($access_token, \config('jwt.publicKey'), [\config('jwt.type')]);
-            //挂在到Request请求对象
-            $request->user = $auth->user;
+			/** @var $managerDao ManagerDao */
+            $managerDao = \Swoft::getBean(ManagerDao::class);
+			/** 挂在到Request请求对象*/
+			$request->user = $managerDao->getManagerById($auth->user->user_id);
+			print_r($request->user);
+			echo "vvv",PHP_EOL;
         } catch (\Exception $e) {
             return Message::error('授权失败');
         }

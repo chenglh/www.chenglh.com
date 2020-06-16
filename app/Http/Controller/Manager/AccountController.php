@@ -43,8 +43,8 @@ class AccountController{
 	{
 		$post = $request->post();
 		$this->managerLogic->login($post);
-		$token = $this->managerService->login($post['username'], $post['password']);
-		return Message::success('success',Message::CODE_SUCCESS,['token'=>$token]);
+		$access_token = $this->managerService->login($post['username'], $post['password']);
+		return Message::success('success',Message::CODE_SUCCESS,['access_token'=>$access_token]);
 	}
     /**
      * Get data list. access uri path: /account

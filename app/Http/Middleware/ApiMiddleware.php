@@ -7,16 +7,15 @@
  * @contact group@swoft.org
  * @license https://github.com/swoft-cloud/swoft/blob/master/LICENSE
  */
-
 namespace App\Http\Middleware;
 
+use Swoft\Context\Context;
+use Swoft\Http\Message\Request;
+use Swoft\Exception\SwoftException;
+use Swoft\Bean\Annotation\Mapping\Bean;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Swoft\Bean\Annotation\Mapping\Bean;
-use Swoft\Context\Context;
-use Swoft\Exception\SwoftException;
-use Swoft\Http\Message\Request;
 use Swoft\Http\Server\Contract\MiddlewareInterface;
 
 /**
