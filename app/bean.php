@@ -128,6 +128,25 @@ return [
 		'maxWaitTime' => 0,
 		'maxIdleTime' => 60,
 	],
+    'redis1'              => [//连接数据库1
+        'class'    => RedisDb::class,
+        'host'     => '127.0.0.1',
+        'port'     => 6379,
+        'database' => 1,
+        'option'   => [
+            'prefix' => '',
+            'serializer' => 0 //不需要序列化
+        ]
+    ],
+    'redis1.pool' => [
+        'class'       => Swoft\Redis\Pool::class,
+        'redisDb'     => bean('redis1'),
+        'minActive'   => 10,
+        'maxActive'   => 20,
+        'maxWait'     => 0,
+        'maxWaitTime' => 0,
+        'maxIdleTime' => 60,
+    ],
     'user'               => [
         'class'   => ServiceClient::class,
         'host'    => '127.0.0.1',

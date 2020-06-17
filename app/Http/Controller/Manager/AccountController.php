@@ -6,6 +6,7 @@
  */
 namespace App\Http\Controller\Manager;
 
+use App\Model\Dao\AccessTokenDao;
 use App\Model\Logic\ManagerLogic;
 use App\Model\Service\ManagerService;
 use App\Utils\Message;
@@ -35,7 +36,14 @@ class AccountController{
 	 */
 	private $managerService;
 
+    /**
+     * @Inject()
+     * @var $accessTokenDao AccessTokenDao
+     */
+    private $accessTokenDao;
+
 	/**
+     * 用户登录
 	 * @RequestMapping(route="/v1/login")
 	 * @return array
 	 */
@@ -46,6 +54,18 @@ class AccountController{
 		$access_token = $this->managerService->login($post['username'], $post['password']);
 		return Message::success('success',Message::CODE_SUCCESS,['access_token'=>$access_token]);
 	}
+
+    /**
+     * 用户登出
+     * @RequestMapping(route="/v1/logout")
+     * @return array
+     */
+	public function logout(Request $request)
+    {
+        $this->accessTokenDao->delete($request->user->user_id);
+        return Message::success('success',Message::CODE_SUCCESS,[]);
+    }
+
     /**
      * Get data list. access uri path: /account
      * @RequestMapping(route="/account", method=RequestMethod::GET)

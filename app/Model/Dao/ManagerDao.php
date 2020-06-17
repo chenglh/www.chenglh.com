@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * 管理员Dao层
  * @Author：chenglh

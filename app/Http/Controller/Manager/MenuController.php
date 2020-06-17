@@ -26,13 +26,6 @@ use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
  * @Middleware(AuthMiddleware::class)
  */
 class MenuController{
-
-    /**
-     * @var
-     */
-    private $managerDao;
-
-//    private $managerMenu
     /**
      * 用户菜单列表
      * @RequestMapping(route="menu",method=RequestMethod::GET)

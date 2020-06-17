@@ -6,13 +6,15 @@
  */
 namespace App\Model\Service;
 
+use App\Model\Dao\AccessTokenDao;
+use Firebase\JWT\JWT;
 use App\Constant\ExceptionMsg;
 use App\Exception\ServiceException;
 use App\Model\Dao\ManagerDao;
 use App\Model\Entity\Manager;
-use Firebase\JWT\JWT;
 use Swoft\Bean\Annotation\Mapping\Bean;
 use Swoft\Bean\Annotation\Mapping\Inject;
+use Swoft\Redis\Redis;
 
 /**
  * Class ManagerService
@@ -25,6 +27,12 @@ class ManagerService
 	 * @var ManagerDao \App\Model\Dao\ManagerDao
 	 */
 	private $managerDao;
+
+    /**
+     * @Inject()
+     * @var $accessTokenDao AccessTokenDao
+     */
+	private $accessTokenDao;
 
 	/**
 	 * 创建用户
@@ -77,21 +85,33 @@ class ManagerService
 
 	/**
 	 * 生成Token
-	 * @param int $id
+	 * @param int $user_id
 	 * @return String
 	 */
-	public function getTokenByManagerId($id)
+	public function getTokenByManagerId($user_id)
 	{
-		//登陆成功使用jwt返回token
-		$private = \config('jwt.privateKey');
-		$type = \config('jwt.type');
-
+	    //access_token数据串
 		$tokenParam = [
 			'iat' => time(),// 创建时间
 			'user' => [
-				'user_id' => $id,// 用户id
+				'user_id' => $user_id,// 用户id
 			]
 		];
-		return JWT::encode($tokenParam, $private, $type);
+
+		$access_token = JWT::encode($tokenParam, \config('jwt.privateKey'), \config('jwt.type'));
+        //协程写token及写入表中
+        sgo(function () use ($user_id, $access_token) {
+            $data = [
+                'manager_id' => $user_id,
+                'login_type' => 0,
+                'access_token' => $access_token,
+                'login_ip' => getRemoteAddr()
+            ];
+            $this->accessTokenDao->create($data);
+        });
+        $redis1 = Redis::connection('redis1.pool');
+        $redis1->set('manager:token:' . $user_id, $access_token, 300);
+
+		return $access_token;
 	}
 }

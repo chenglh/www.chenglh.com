@@ -9,15 +9,19 @@
  */
 namespace App\Http\Middleware;
 
+use App\Model\Logic\ManagerLogic;
 use Firebase\JWT\JWT;
 use App\Utils\Message;
 use App\Model\Dao\ManagerDao;
+use App\Constant\ExceptionMsg;
 use Swoft\Http\Message\Request;
+use Swoft\Exception\SwoftException;
+use App\Exception\ValidateException;
+use App\Model\Logic\AccessTokenLogic;
+use Swoft\Bean\Annotation\Mapping\Bean;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Swoft\Bean\Annotation\Mapping\Bean;
-use Swoft\Exception\SwoftException;
 use Swoft\Http\Server\Contract\MiddlewareInterface;
 
 /**
@@ -47,14 +51,23 @@ class AuthMiddleware implements MiddlewareInterface
         $access_token = $request->getHeaderLine('access_token');
         try {
             $auth = JWT::decode($access_token, \config('jwt.publicKey'), [\config('jwt.type')]);
+            /** 单端登录 */
+            /** @var $tokenLogic AccessTokenLogic */
+            $tokenLogic = \Swoft::getBean(AccessTokenLogic::class);
+            $tokenLogic->checkAccessToken($auth->user->user_id, $access_token);
+
 			/** @var $managerDao ManagerDao */
             $managerDao = \Swoft::getBean(ManagerDao::class);
-			/** 挂在到Request请求对象*/
-			$request->user = $managerDao->getManagerById($auth->user->user_id);
-			print_r($request->user);
-			echo "vvv",PHP_EOL;
+            $manager = $managerDao->getManagerById($auth->user->user_id);
+
+            /** @var $managerLogic ManagerLogic */
+            $managerLogic = \Swoft::getBean(ManagerLogic::class);
+            $managerLogic->checkStatus($manager);
+
+            /** 挂载到Request请求对象*/
+            $request->user = $manager;
         } catch (\Exception $e) {
-            return Message::error('授权失败');
+            return Message::error(ExceptionMsg::ERR_AUTHORIZE);
         }
         return $handler->handle($request);
     }
