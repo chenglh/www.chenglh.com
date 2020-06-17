@@ -16,15 +16,15 @@ use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
 // use Swoft\Http\Message\Response;
 
 /**
- * Class RolesController
+ * Class RoleController
  *
- * @Controller(prefix="/roles")
+ * @Controller(prefix="/role")
  * @package App\Http\Controller\Manager
  */
-class RolesController{
+class RoleController{
     /**
-     * Get data list. access uri path: /roles
-     * @RequestMapping(route="/roles", method=RequestMethod::GET)
+     * Get data list. access uri path: /role
+     * @RequestMapping(route="/role", method=RequestMethod::GET)
      * @return array
      */
     public function index(): array
@@ -33,7 +33,7 @@ class RolesController{
     }
 
     /**
-     * Get one by ID. access uri path: /roles/{id}
+     * Get one by ID. access uri path: /role/{id}
      * @RequestMapping(route="{id}", method=RequestMethod::GET)
      * @return array
      */
@@ -43,8 +43,8 @@ class RolesController{
     }
 
     /**
-     * Create a new record. access uri path: /roles
-     * @RequestMapping(route="/roles", method=RequestMethod::POST)
+     * Create a new record. access uri path: /role
+     * @RequestMapping(route="/role", method=RequestMethod::POST)
      * @return array
      */
     public function post(): array
@@ -53,7 +53,7 @@ class RolesController{
     }
 
     /**
-     * Update one by ID. access uri path: /roles/{id}
+     * Update one by ID. access uri path: /role/{id}
      * @RequestMapping(route="{id}", method=RequestMethod::PUT)
      * @return array
      */
@@ -63,7 +63,7 @@ class RolesController{
     }
 
     /**
-     * Delete one by ID. access uri path: /roles/{id}
+     * Delete one by ID. access uri path: /role/{id}
      * @RequestMapping(route="{id}", method=RequestMethod::DELETE)
      * @return array
      */

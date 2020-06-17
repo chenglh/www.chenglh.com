@@ -14,7 +14,8 @@ use Swoft\Redis\Redis;
  * Class AccessTokenDao
  * @Bean()
  */
-class AccessTokenDao{
+class AccessTokenDao
+{
     /**
      * 获取用户登录信息
      * @param int $manager_id

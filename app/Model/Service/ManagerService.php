@@ -42,8 +42,13 @@ class ManagerService
 	 */
 	public function create(array $data)
 	{
-		$data['create_time'] = time();
-
+        //$data['create_time'] = time();
+        //$this->codeService->checkCode($data['mobile'], $data['code']);
+        //$user = $this->getUserByMobile($data['mobile']);
+        //if ($user) {
+        //    throw new ServiceException('该手机号已经注册');
+        //}
+        //return $this->userDao->create($data);
 	}
 
 	/**
@@ -88,7 +93,7 @@ class ManagerService
 	 * @param int $user_id
 	 * @return String
 	 */
-	public function getTokenByManagerId($user_id)
+	public function getTokenByManagerId(int $user_id)
 	{
 	    //access_token数据串
 		$tokenParam = [

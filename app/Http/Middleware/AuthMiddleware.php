@@ -9,14 +9,13 @@
  */
 namespace App\Http\Middleware;
 
-use App\Model\Logic\ManagerLogic;
 use Firebase\JWT\JWT;
-use App\Utils\Message;
 use App\Model\Dao\ManagerDao;
 use App\Constant\ExceptionMsg;
 use Swoft\Http\Message\Request;
 use Swoft\Exception\SwoftException;
 use App\Exception\ValidateException;
+use App\Model\Logic\ManagerLogic;
 use App\Model\Logic\AccessTokenLogic;
 use Swoft\Bean\Annotation\Mapping\Bean;
 use Psr\Http\Message\ResponseInterface;
@@ -67,8 +66,14 @@ class AuthMiddleware implements MiddlewareInterface
             /** 挂载到Request请求对象*/
             $request->user = $manager;
         } catch (\Exception $e) {
-            return Message::error(ExceptionMsg::ERR_AUTHORIZE);
+            throw new ValidateException(ExceptionMsg::ERR_AUTHORIZE);
         }
+
+        /** 权限校验 */
+        if (!in_array($path, \config('app.allow_menu'))) {
+
+        }
+
         return $handler->handle($request);
     }
 }

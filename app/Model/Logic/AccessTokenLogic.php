@@ -17,7 +17,8 @@ use Swoft\Bean\Annotation\Mapping\Inject;
  * Class AccessTokenLogic
  * @Bean()
  */
-class AccessTokenLogic{
+class AccessTokenLogic
+{
     /**
      * @Inject("redis1.pool")
      * @var $redis1 \Swoft\redis\redis
