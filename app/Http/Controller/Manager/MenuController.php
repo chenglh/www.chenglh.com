@@ -11,6 +11,9 @@
 namespace App\Http\Controller\Manager;
 
 use App\Http\Middleware\AuthMiddleware;
+use App\Model\Dao\ManagerRoleDao;
+use App\Model\Dao\MenuDao;
+use Swoft\Bean\Annotation\Mapping\Inject;
 use Swoft\Http\Message\Request;
 use Swoft\Http\Message\Response;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
@@ -28,9 +31,16 @@ use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
 class MenuController
 {
     /**
-     * @var $role
+     * @Inject()
+     * @var $managerRoleDao ManagerRoleDao
      */
-    private $role;
+    private $managerRoleDao;
+
+    /**
+     * @Inject()
+     * @var $menuDao MenuDao
+     */
+    private $menuDao;
 
     /**
      * 用户菜单列表
@@ -38,14 +48,14 @@ class MenuController
      * @return array
      */
     public function mlist(Request $request): array {
-		//return ['item0', 'item1'];
+        /** 角色权限组 */
+        $roles = $this->managerRoleDao->getRoleByRoleId($request->user->role_id);
+        $menu_ids = $roles->getRoleMenu();
 
-        //再查询角色
+        /** 菜单列表 */
+        $this->menuDao->getMenu($menu_ids);
 
-
-        //再查询菜单
-
-
+        return ['item0', 'item1'];
     }
 
     /**
