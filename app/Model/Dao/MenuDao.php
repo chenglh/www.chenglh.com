@@ -15,11 +15,13 @@ use Swoft\Bean\Annotation\Mapping\Bean;
 class MenuDao
 {
     /**
+     * @param int $role_id
      * @param string $menu_ids
      */
-    public function getMenu(string $menu_ids) {
+    public function getMenu(int $role_id, string $menu_ids) {
         //缓存读取
 
+        //设置缓存
 
     }
 }
