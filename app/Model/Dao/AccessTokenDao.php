@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /**
- * TokenDao层
+ * TokenDao层(数据操作层)
  * @Author：chenglh
  * @Time：2020-06-17
  */

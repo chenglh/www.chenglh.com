@@ -27,7 +27,7 @@ class MenuDao
      */
     public function getMenu(int $role_id, string $menu_ids) {
         //缓存读取
-        $this->redis1->get('get');
+        //$this->redis1->get('get');
 
         //设置缓存
 
