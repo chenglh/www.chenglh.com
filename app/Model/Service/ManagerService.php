@@ -24,13 +24,13 @@ class ManagerService
 {
 	/**
 	 * @Inject()
-	 * @var ManagerDao \App\Model\Dao\ManagerDao
+	 * @var ManagerDao
 	 */
 	private $managerDao;
 
     /**
      * @Inject()
-     * @var $accessTokenDao AccessTokenDao
+     * @var AccessTokenDao
      */
 	private $accessTokenDao;
 

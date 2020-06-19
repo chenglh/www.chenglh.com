@@ -6,10 +6,10 @@
  */
 namespace App\Http\Controller\Manager;
 
+use App\Utils\Message;
 use App\Model\Dao\AccessTokenDao;
 use App\Model\Logic\ManagerLogic;
 use App\Model\Service\ManagerService;
-use App\Utils\Message;
 use Swoft\Bean\Annotation\Mapping\Inject;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
 use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
@@ -26,19 +26,19 @@ use Swoft\Http\Message\Response;
 class AccountController{
 	/**
 	 * @Inject()
-	 * @var managerLogic \App\Model\Logic\ManagerLogic
+	 * @var ManagerLogic
 	 */
 	private $managerLogic;
 
 	/**
 	 * @Inject()
-	 * @var managerService \App\Model\Service\ManagerService
+	 * @var ManagerService
 	 */
 	private $managerService;
 
     /**
      * @Inject()
-     * @var $accessTokenDao AccessTokenDao
+     * @var AccessTokenDao
      */
     private $accessTokenDao;
 

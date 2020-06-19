@@ -31,7 +31,7 @@ class ManagerLogic
 	public function checkStatus(array $data) {
 	    if (empty($data)) {
             throw new ValidationException(ExceptionMsg::ERR_NOTREGISTE);
-        } elseif ($data['login_status'] == 2) {
+        } elseif ($data['loginStatus'] == 2) {
             throw new ValidationException(ExceptionMsg::ERR_LOGINSTATE);
         }
     }

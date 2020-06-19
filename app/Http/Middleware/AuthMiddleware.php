@@ -9,6 +9,7 @@
  */
 namespace App\Http\Middleware;
 
+use App\Model\Entity\Manager;
 use Firebase\JWT\JWT;
 use App\Model\Dao\ManagerDao;
 use App\Constant\ExceptionMsg;
@@ -57,7 +58,7 @@ class AuthMiddleware implements MiddlewareInterface
 
 			/** @var $managerDao ManagerDao */
             $managerDao = \Swoft::getBean(ManagerDao::class);
-            $manager = $managerDao->getManagerById($auth->user->user_id);
+            $manager = $managerDao->getManagerById($auth->user->user_id)->toArray();
 
             /** @var $managerLogic ManagerLogic */
             $managerLogic = \Swoft::getBean(ManagerLogic::class);

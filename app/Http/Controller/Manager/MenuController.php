@@ -32,13 +32,13 @@ class MenuController
 {
     /**
      * @Inject()
-     * @var $managerRoleDao ManagerRoleDao
+     * @var ManagerRoleDao
      */
     private $managerRoleDao;
 
     /**
      * @Inject()
-     * @var $menuDao MenuDao
+     * @var MenuDao
      */
     private $menuDao;
 

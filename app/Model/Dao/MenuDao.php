@@ -7,8 +7,6 @@
 namespace App\Model\Dao;
 
 use Swoft\Bean\Annotation\Mapping\Bean;
-use Swoft\Bean\Annotation\Mapping\Inject;
-use Swoft\Redis\Redis;
 
 /**
  * Class MenuDao
@@ -16,11 +14,6 @@ use Swoft\Redis\Redis;
  */
 class MenuDao
 {
-    /**
-     * @Inject(redis1.pool)
-     * @var $redis1 Redis
-     */
-    private $redis1;
     /**
      * @param int $role_id
      * @param string $menu_ids

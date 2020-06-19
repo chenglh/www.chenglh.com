@@ -21,13 +21,13 @@ class AccessTokenLogic
 {
     /**
      * @Inject("redis1.pool")
-     * @var $redis1 \Swoft\redis\redis
+     * @var Redis
      */
     private $redis1;
 
     /**
      * @Inject()
-     * @var $accessTokenDao AccessTokenDao
+     * @var AccessTokenDao
      */
     private $accessTokenDao;
 
