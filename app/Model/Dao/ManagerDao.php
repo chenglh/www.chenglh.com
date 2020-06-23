@@ -21,7 +21,7 @@ class ManagerDao
 	 * @return mixed
 	 */
 	public function getManagerByMobile(string $mobile) {
-		return Manager::where('mobile',$mobile)->first();
+		return Manager::where('manager_mobile',$mobile)->first();
 	}
 
 	/**

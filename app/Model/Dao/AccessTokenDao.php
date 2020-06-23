@@ -18,12 +18,12 @@ class AccessTokenDao
 {
     /**
      * 获取用户登录信息
-     * @param int $manager_id
+     * @param int $access_mid
      * @return mixed
      */
-    public function getAccessTokenByManagerId(int $manager_id)
+    public function getAccessTokenByManagerId(int $access_mid)
     {
-        return AccessToken::where('manager_id',$manager_id)->first();
+        return AccessToken::where('access_mid', $access_mid)->first();
     }
 
     /**
@@ -33,9 +33,14 @@ class AccessTokenDao
      */
     public function create(array $data)
     {
-        return AccessToken::updateOrInsert(
-            ['manager_id'=>$data['user_id'],'login_type'=>$data['login_type']],
-            ['access_token'=>$data['access_token'],'login_time'=>time(),'login_ip'=>$data['login_id']]
+        return AccessToken::updateOrCreate(
+            ['access_mid'=>$data['access_mid'],'access_login_type'=>$data['access_login_type']],
+			[
+				'access_token'=>$data['access_token'],
+				'access_login_ip'=>$data['access_login_ip'],
+				'create_at'=>date('Y-m-d H:i:s'),
+				'update_at'=>date('Y-m-d H:i:s')
+			]
         );
     }
 

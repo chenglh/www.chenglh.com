@@ -16,7 +16,6 @@ use Swoft\Bean\Annotation\Mapping\Bean;
 class ManagerRoleDao
 {
     /**
-     * 角色列表
      * @param int $role_id
      * @return ManagerRole
      */

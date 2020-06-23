@@ -7,6 +7,7 @@
 use \Swoft\Redis\Redis;
 
 /** 实现系统级别 */
+
 /**
  * 获取错误验证次数
  */
@@ -147,15 +148,20 @@ function cacheRemeber($name, $value = '', $options = null) {
 /** 实现业务级别 */
 
 /**
- * @param bool $substr  是否截取
- * @return array|mixed|string
+ * 获取客户端IP
+ * @return string
  */
-function getRemoteAddr(bool $substr = false) : string {
+function getRemoteAddr() : string {
+	return Swoft\Context\Context::get()->getRequest()->server('remote_addr');
+}
+
+/**
+ * 获取客户端IP段
+ * @return string
+ */
+function getRemoteAddrPart() : string {
 	$remote_addr = Swoft\Context\Context::get()->getRequest()->server('remote_addr');
-	if ($substr == true) {
-		$remote_addr = substr($remote_addr, 0, -4);
-	}
-	return $remote_addr;
+	return substr($remote_addr, 0, -4);
 }
 
 /**

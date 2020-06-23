@@ -6,8 +6,9 @@
  */
 namespace App\Model\Logic;
 
+use App\Model\Entity\AccessToken;
 use Swoft\Redis\Redis;
-use App\Constant\ExceptionMsg;
+use App\Constant\Message;
 use App\Model\Dao\AccessTokenDao;
 use App\Exception\ValidateException;
 use Swoft\Bean\Annotation\Mapping\Bean;
@@ -41,17 +42,18 @@ class AccessTokenLogic
         //先从缓存中检查
         $token = $this->redis1->get('manager:token:' . $manager_id);
         if (empty($token)) {
-            //没有数据，再从数据表中检查或写缓存
+            //缓存没有数据，则从数据表中查询
+			/** @var AccessToken $result */
             $result = $this->accessTokenDao->getAccessTokenByManagerId($manager_id);
             if ($result != false) {
-                $token = $result->access_token;
+                $token = $result->getAccessToken();
                 $this->redis1->set('manager:token:' . $manager_id, $token, 300);
             } else {
-                throw new ValidateException(ExceptionMsg::ERR_AUTHORIZE);
+                throw new ValidateException(Message::ERR_AUTHORIZE);
             }
         }
         if ($token != $access_token) {
-            throw new ValidateException(ExceptionMsg::ERR_AUTHORIZE);
+            throw new ValidateException(Message::ERR_AUTHORIZE);
         }
     }
 }

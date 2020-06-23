@@ -9,6 +9,7 @@
  */
 namespace App\Http\Middleware;
 
+use App\Constant\Message;
 use App\Model\Entity\Manager;
 use Firebase\JWT\JWT;
 use App\Model\Dao\ManagerDao;
@@ -54,20 +55,23 @@ class AuthMiddleware implements MiddlewareInterface
             /** 单端登录 */
             /** @var $tokenLogic AccessTokenLogic */
             $tokenLogic = \Swoft::getBean(AccessTokenLogic::class);
-            $tokenLogic->checkAccessToken($auth->user->managerId, $access_token);
+            $tokenLogic->checkAccessToken($auth->user->manager_id, $access_token);
 
 			/** @var $managerDao ManagerDao */
             $managerDao = \Swoft::getBean(ManagerDao::class);
-            $manager = $managerDao->getManagerById($auth->user->managerId)->toArray();
+            /** @var Manager $manager */
+            $manager = $managerDao->getManagerById($auth->user->manager_id);
+            $manager = $manager->getArrayableAttributes();
 
-            /** @var $managerLogic ManagerLogic */
+			/** @var $managerLogic ManagerLogic */
             $managerLogic = \Swoft::getBean(ManagerLogic::class);
             $managerLogic->checkStatus($manager);
 
             /** 挂载到Request请求对象*/
             $request->user = $manager;
+            print_r($request->user);
         } catch (\Exception $e) {
-            throw new ValidateException(ExceptionMsg::ERR_AUTHORIZE);
+            throw new ValidateException(Message::ERR_AUTHORIZE);
         }
 
         /** 用户权限校验 */

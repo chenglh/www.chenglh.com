@@ -6,12 +6,13 @@
  */
 namespace App\Model\Service;
 
-use App\Model\Dao\AccessTokenDao;
+
 use Firebase\JWT\JWT;
-use App\Constant\ExceptionMsg;
-use App\Exception\ServiceException;
+use App\Constant\Message;
 use App\Model\Dao\ManagerDao;
 use App\Model\Entity\Manager;
+use App\Model\Dao\AccessTokenDao;
+use App\Exception\ServiceException;
 use Swoft\Bean\Annotation\Mapping\Bean;
 use Swoft\Bean\Annotation\Mapping\Inject;
 use Swoft\Redis\Redis;
@@ -60,21 +61,21 @@ class ManagerService
 	 */
 	public function login(string $mobile, string $password)
 	{
-		$remote_addr = getRemoteAddr(true);
 		/** @var Manager $manager */
 		$manager = $this->getManagerByMobile($mobile);
 		if (!$manager) {
-			setErrorValiCount($remote_addr, 60 * 20);
-			throw new ServiceException(ExceptionMsg::ERR_NOTREGISTE);
-		}
+			setErrorValiCount(getRemoteAddrPart(), 1200);
+			throw new ServiceException(Message::ERR_NOTREGISTE);
+		}echo getHashPassword($password, $manager->getPasswordSalt());
 		if ($manager->getPassword() != getHashPassword($password, $manager->getPasswordSalt())) {
-			setErrorValiCount($remote_addr, 60 * 20);
-			throw new ServiceException(ExceptionMsg::ERR_PASSWORD);
+			setErrorValiCount(getRemoteAddrPart(), 1200);
+			throw new ServiceException(Message::ERR_PASSWORD);
 		}
 		if ($manager->getLoginStatus() == 2) {
-			setErrorValiCount($remote_addr, 60 * 20);
-			throw new ServiceException(ExceptionMsg::ERR_LOGINSTATE);
+			setErrorValiCount(getRemoteAddrPart(), 1200);
+			throw new ServiceException(Message::ERR_LOGINSTATE);
 		}
+
 		return $this->getTokenByManagerId($manager->getManagerId());
 	}
 
@@ -90,34 +91,33 @@ class ManagerService
 
 	/**
 	 * 生成Token
-	 * @param int $managerId
+	 * @param int $manager_id
 	 * @return String
 	 */
-	public function getTokenByManagerId(int $managerId)
+	public function getTokenByManagerId(int $manager_id)
 	{
-	    //jwt数据串
+	    //jwt加密串
 		$tokenParam = [
-			'iat' => time(),//创建时间
+			'iat' => time(),// 创建时间
 			'user' => [
-				'managerId' => $managerId,//管理员ID
+				'manager_id' => $manager_id,// 管理员id
 			]
 		];
-
 		$access_token = JWT::encode($tokenParam, \config('jwt.privateKey'), \config('jwt.type'));
-        {
-            //协程写token及写入表中
-            sgo(function () use ($managerId, $access_token) {
-                $data = [
-                    'manager_id' => $managerId,
-                    'login_type' => 0,
-                    'access_token' => $access_token,
-                    'login_ip' => getRemoteAddr()
-                ];
-                $this->accessTokenDao->create($data);
-            });
-        }
+		{
+			//协程写token及写入表中
+			sgo(function () use ($manager_id, $access_token) {
+				$data = [
+					'access_mid' => $manager_id,
+					'access_token' => $access_token,
+					'access_login_ip' => getRemoteAddr(),
+					'access_login_type' => 0,
+				];
+				$this->accessTokenDao->create($data);
+			});
+		}
         $redis1 = Redis::connection('redis1.pool');
-        $redis1->set('manager:token:' . $managerId, $access_token, 300);
+        $redis1->set('manager:token:' . $manager_id, $access_token, 300);
 
 		return $access_token;
 	}

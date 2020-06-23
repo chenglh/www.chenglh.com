@@ -10,7 +10,7 @@ use Swoft\Db\Eloquent\Model;
 
 
 /**
- *
+ * 管理员Token表
  * Class AccessToken
  *
  * @since 2.0
@@ -22,20 +22,20 @@ class AccessToken extends Model
     /**
      * 自增ID
      * @Id()
-     * @Column()
+     * @Column(name="access_id", prop="accessId")
      *
      * @var int
      */
-    private $id;
+    private $accessId;
 
     /**
      * 管理员ID
      *
-     * @Column(name="manager_id", prop="managerId")
+     * @Column(name="access_mid", prop="accessMid")
      *
      * @var int
      */
-    private $managerId;
+    private $accessMid;
 
     /**
      * Token值
@@ -49,51 +49,60 @@ class AccessToken extends Model
     /**
      * 登录IP
      *
-     * @Column(name="login_ip", prop="loginIp")
+     * @Column(name="access_login_ip", prop="accessLoginIp")
      *
      * @var string
      */
-    private $loginIp;
-
-    /**
-     * 登录时间
-     *
-     * @Column(name="login_time", prop="loginTime")
-     *
-     * @var int
-     */
-    private $loginTime;
+    private $accessLoginIp;
 
     /**
      * 终端类型，0-WAP;1-IOS;2-Android
      *
-     * @Column(name="login_type", prop="loginType")
+     * @Column(name="access_login_type", prop="accessLoginType")
      *
      * @var int
      */
-    private $loginType;
+    private $accessLoginType;
+
+    /**
+     * 登录时间
+     *
+     * @Column(name="create_at", prop="createAt")
+     *
+     * @var string
+     */
+    private $createAt;
+
+    /**
+     * 更新时间
+     *
+     * @Column(name="update_at", prop="updateAt")
+     *
+     * @var string
+     */
+    private $updateAt;
 
 
     /**
-     * @param int $id
+     * @param int $accessId
      *
      * @return self
      */
-    public function setId(int $id): self
+    public function setAccessId(int $accessId): self
     {
-        $this->id = $id;
+        $this->accessId = $accessId;
 
         return $this;
     }
 
     /**
-     * @param int $managerId
+     * @param int $accessMid
      *
      * @return self
      */
-    public function setManagerId(int $managerId): self
+    public function setAccessMid(int $accessMid): self
     {
-        $this->managerId = $managerId;
+        $this->accessMid = $accessMid;
 
         return $this;
     }
@@ -111,37 +120,49 @@ class AccessToken extends Model
     }
 
     /**
-     * @param string $loginIp
+     * @param string $accessLoginIp
      *
      * @return self
      */
-    public function setLoginIp(string $loginIp): self
+    public function setAccessLoginIp(string $accessLoginIp): self
     {
-        $this->loginIp = $loginIp;
+        $this->accessLoginIp = $accessLoginIp;
 
         return $this;
     }
 
     /**
-     * @param int $loginTime
+     * @param int $accessLoginType
      *
      * @return self
      */
-    public function setLoginTime(int $loginTime): self
+    public function setAccessLoginType(int $accessLoginType): self
     {
-        $this->loginTime = $loginTime;
+        $this->accessLoginType = $accessLoginType;
 
         return $this;
     }
 
     /**
-     * @param int $loginType
+     * @param string $createAt
      *
      * @return self
      */
-    public function setLoginType(int $loginType): self
+    public function setCreateAt(string $createAt): self
     {
-        $this->loginType = $loginType;
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * @param string $updateAt
+     *
+     * @return self
+     */
+    public function setUpdateAt(string $updateAt): self
+    {
+        $this->updateAt = $updateAt;
 
         return $this;
     }
@@ -149,17 +170,17 @@ class AccessToken extends Model
     /**
      * @return int
      */
-    public function getId(): ?int
+    public function getAccessId(): ?int
     {
-        return $this->id;
+        return $this->accessId;
     }
 
     /**
      * @return int
      */
-    public function getManagerId(): ?int
+    public function getAccessMid(): ?int
     {
-        return $this->managerId;
+        return $this->accessMid;
     }
 
     /**
@@ -173,25 +194,33 @@ class AccessToken extends Model
     /**
      * @return string
      */
-    public function getLoginIp(): ?string
+    public function getAccessLoginIp(): ?string
     {
-        return $this->loginIp;
+        return $this->accessLoginIp;
     }
 
     /**
      * @return int
      */
-    public function getLoginTime(): ?int
+    public function getAccessLoginType(): ?int
     {
-        return $this->loginTime;
+        return $this->accessLoginType;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getLoginType(): ?int
+    public function getCreateAt(): ?string
     {
-        return $this->loginType;
+        return $this->createAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdateAt(): ?string
+    {
+        return $this->updateAt;
     }
 
 }

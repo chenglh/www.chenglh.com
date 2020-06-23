@@ -6,7 +6,7 @@
  */
 namespace App\Model\Logic;
 
-use App\Constant\ExceptionMsg;
+use App\Constant\Message;
 use App\Exception\ValidateException;
 use Dotenv\Exception\ValidationException;
 use Swoft\Bean\Annotation\Mapping\Bean;
@@ -23,20 +23,21 @@ class ManagerLogic
 	 * @throws ValidateException
 	 */
 	public function login(array $data) {
-		if (getErrorValiCount(getRemoteAddr(true)) >= ExceptionMsg::ERR_LOGIN_TIME) {
-			throw new ValidateException(ExceptionMsg::ERR_LOGIN_LIMIT);
+		/** 判断账号是否恶意登录被锁 */
+		if (getErrorValiCount(getRemoteAddrPart()) >= Message::ERR_LOGIN_TIME) {
+			throw new ValidateException(Message::ERR_LOGIN_LIMIT);
 		}
 	}
 
-    /**
-     * 检查用户
-     * @param array $data
-     */
+	/**
+	 * 检查账号是否正常
+	 * @param array $data
+	 */
 	public function checkStatus(array $data) {
 	    if (empty($data)) {
-            throw new ValidationException(ExceptionMsg::ERR_NOTREGISTE);
-        } elseif ($data['loginStatus'] == 2) {
-            throw new ValidationException(ExceptionMsg::ERR_LOGINSTATE);
+            throw new ValidationException(Message::ERR_NOTREGISTE);
+        } elseif ($data['login_status'] == 2) {
+            throw new ValidationException(Message::ERR_LOGINSTATE);
         }
     }
 }

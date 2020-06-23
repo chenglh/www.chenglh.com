@@ -31,20 +31,20 @@ class Manager extends Model
     /**
      * 姓名
      *
-     * @Column(name="user_name", prop="userName")
+     * @Column(name="manager_name", prop="managerName")
      *
      * @var string
      */
-    private $userName;
+    private $managerName;
 
     /**
      * 登录账号
      *
-     * @Column()
+     * @Column(name="manager_mobile", prop="managerMobile")
      *
      * @var string
      */
-    private $mobile;
+    private $managerMobile;
 
     /**
      * 登录密码
@@ -76,32 +76,14 @@ class Manager extends Model
     /**
      * 登录状态,0未登录,1登录
      *
-     * @Column(name="is_login", prop="isLogin")
+     * @Column(name="login_state", prop="loginState")
      *
      * @var int
      */
-    private $isLogin;
+    private $loginState;
 
     /**
-     * 登录IP
-     *
-     * @Column(name="last_login_ip", prop="lastLoginIp")
-     *
-     * @var string
-     */
-    private $lastLoginIp;
-
-    /**
-     * 最后登录时间
-     *
-     * @Column(name="last_login_time", prop="lastLoginTime")
-     *
-     * @var int
-     */
-    private $lastLoginTime;
-
-    /**
-     * 状态,1正常;2禁用
+     * 账号状态,1正常;2禁用
      *
      * @Column(name="login_status", prop="loginStatus")
      *
@@ -110,22 +92,40 @@ class Manager extends Model
     private $loginStatus;
 
     /**
-     * 创建时间
+     * 登录IP
      *
-     * @Column(name="create_time", prop="createTime")
+     * @Column(name="login_ip", prop="loginIp")
+     *
+     * @var string
+     */
+    private $loginIp;
+
+    /**
+     * 最后登录时间
+     *
+     * @Column(name="login_time", prop="loginTime")
      *
      * @var int
      */
-    private $createTime;
+    private $loginTime;
+
+    /**
+     * 登录时间
+     *
+     * @Column(name="create_at", prop="createAt")
+     *
+     * @var string
+     */
+    private $createAt;
 
     /**
      * 更新时间
      *
-     * @Column(name="update_time", prop="updateTime")
+     * @Column(name="update_at", prop="updateAt")
      *
-     * @var int
+     * @var string
      */
-    private $updateTime;
+    private $updateAt;
 
 
     /**
@@ -141,25 +141,25 @@ class Manager extends Model
     }
 
     /**
-     * @param string $userName
+     * @param string $managerName
      *
      * @return self
      */
-    public function setUserName(string $userName): self
+    public function setManagerName(string $managerName): self
     {
-        $this->userName = $userName;
+        $this->managerName = $managerName;
 
         return $this;
     }
 
     /**
-     * @param string $mobile
+     * @param string $managerMobile
      *
      * @return self
      */
-    public function setMobile(string $mobile): self
+    public function setManagerMobile(string $managerMobile): self
     {
-        $this->mobile = $mobile;
+        $this->managerMobile = $managerMobile;
 
         return $this;
     }
@@ -201,37 +201,13 @@ class Manager extends Model
     }
 
     /**
-     * @param int $isLogin
+     * @param int $loginState
      *
      * @return self
      */
-    public function setIsLogin(int $isLogin): self
+    public function setLoginState(int $loginState): self
     {
-        $this->isLogin = $isLogin;
-
-        return $this;
-    }
-
-    /**
-     * @param string $lastLoginIp
-     *
-     * @return self
-     */
-    public function setLastLoginIp(string $lastLoginIp): self
-    {
-        $this->lastLoginIp = $lastLoginIp;
-
-        return $this;
-    }
-
-    /**
-     * @param int $lastLoginTime
-     *
-     * @return self
-     */
-    public function setLastLoginTime(int $lastLoginTime): self
-    {
-        $this->lastLoginTime = $lastLoginTime;
+        $this->loginState = $loginState;
 
         return $this;
     }
@@ -249,25 +225,49 @@ class Manager extends Model
     }
 
     /**
-     * @param int $createTime
+     * @param string $loginIp
      *
      * @return self
      */
-    public function setCreateTime(int $createTime): self
+    public function setLoginIp(string $loginIp): self
     {
-        $this->createTime = $createTime;
+        $this->loginIp = $loginIp;
 
         return $this;
     }
 
     /**
-     * @param int $updateTime
+     * @param int $loginTime
      *
      * @return self
      */
-    public function setUpdateTime(int $updateTime): self
+    public function setLoginTime(int $loginTime): self
     {
-        $this->updateTime = $updateTime;
+        $this->loginTime = $loginTime;
+
+        return $this;
+    }
+
+    /**
+     * @param string $createAt
+     *
+     * @return self
+     */
+    public function setCreateAt(string $createAt): self
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * @param string $updateAt
+     *
+     * @return self
+     */
+    public function setUpdateAt(string $updateAt): self
+    {
+        $this->updateAt = $updateAt;
 
         return $this;
     }
@@ -283,17 +283,17 @@ class Manager extends Model
     /**
      * @return string
      */
-    public function getUserName(): ?string
+    public function getManagerName(): ?string
     {
-        return $this->userName;
+        return $this->managerName;
     }
 
     /**
      * @return string
      */
-    public function getMobile(): ?string
+    public function getManagerMobile(): ?string
     {
-        return $this->mobile;
+        return $this->managerMobile;
     }
 
     /**
@@ -323,25 +323,9 @@ class Manager extends Model
     /**
      * @return int
      */
-    public function getIsLogin(): ?int
+    public function getLoginState(): ?int
     {
-        return $this->isLogin;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLastLoginIp(): ?string
-    {
-        return $this->lastLoginIp;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLastLoginTime(): ?int
-    {
-        return $this->lastLoginTime;
+        return $this->loginState;
     }
 
     /**
@@ -353,19 +337,35 @@ class Manager extends Model
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getCreateTime(): ?int
+    public function getLoginIp(): ?string
     {
-        return $this->createTime;
+        return $this->loginIp;
     }
 
     /**
      * @return int
      */
-    public function getUpdateTime(): ?int
+    public function getLoginTime(): ?int
     {
-        return $this->updateTime;
+        return $this->loginTime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreateAt(): ?string
+    {
+        return $this->createAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdateAt(): ?string
+    {
+        return $this->updateAt;
     }
 
 }
