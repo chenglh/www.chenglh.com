@@ -90,32 +90,34 @@ class ManagerService
 
 	/**
 	 * 生成Token
-	 * @param int $user_id
+	 * @param int $managerId
 	 * @return String
 	 */
-	public function getTokenByManagerId(int $user_id)
+	public function getTokenByManagerId(int $managerId)
 	{
-	    //access_token数据串
+	    //jwt数据串
 		$tokenParam = [
-			'iat' => time(),// 创建时间
+			'iat' => time(),//创建时间
 			'user' => [
-				'user_id' => $user_id,// 用户id
+				'managerId' => $managerId,//管理员ID
 			]
 		];
 
 		$access_token = JWT::encode($tokenParam, \config('jwt.privateKey'), \config('jwt.type'));
-        //协程写token及写入表中
-        sgo(function () use ($user_id, $access_token) {
-            $data = [
-                'manager_id' => $user_id,
-                'login_type' => 0,
-                'access_token' => $access_token,
-                'login_ip' => getRemoteAddr()
-            ];
-            $this->accessTokenDao->create($data);
-        });
+        {
+            //协程写token及写入表中
+            sgo(function () use ($managerId, $access_token) {
+                $data = [
+                    'manager_id' => $managerId,
+                    'login_type' => 0,
+                    'access_token' => $access_token,
+                    'login_ip' => getRemoteAddr()
+                ];
+                $this->accessTokenDao->create($data);
+            });
+        }
         $redis1 = Redis::connection('redis1.pool');
-        $redis1->set('manager:token:' . $user_id, $access_token, 300);
+        $redis1->set('manager:token:' . $managerId, $access_token, 300);
 
 		return $access_token;
 	}

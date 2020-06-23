@@ -28,6 +28,10 @@ class ManagerLogic
 		}
 	}
 
+    /**
+     * 检查用户
+     * @param array $data
+     */
 	public function checkStatus(array $data) {
 	    if (empty($data)) {
             throw new ValidationException(ExceptionMsg::ERR_NOTREGISTE);
