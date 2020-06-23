@@ -48,8 +48,7 @@ class MenuController
      * @return array
      */
     public function mlist(Request $request): array {
-        /** 角色权限组 */
-        $role_id = $request->user->role_id;
+        $role_id = $request->user->roleId;
         $roles = $this->managerRoleDao->getRoleByRoleId($role_id);
         $menu_ids = $roles->getRoleMenu();
 

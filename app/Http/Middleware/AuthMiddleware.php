@@ -54,11 +54,11 @@ class AuthMiddleware implements MiddlewareInterface
             /** 单端登录 */
             /** @var $tokenLogic AccessTokenLogic */
             $tokenLogic = \Swoft::getBean(AccessTokenLogic::class);
-            $tokenLogic->checkAccessToken($auth->user->user_id, $access_token);
+            $tokenLogic->checkAccessToken($auth->user->managerId, $access_token);
 
 			/** @var $managerDao ManagerDao */
             $managerDao = \Swoft::getBean(ManagerDao::class);
-            $manager = $managerDao->getManagerById($auth->user->user_id)->toArray();
+            $manager = $managerDao->getManagerById($auth->user->managerId)->toArray();
 
             /** @var $managerLogic ManagerLogic */
             $managerLogic = \Swoft::getBean(ManagerLogic::class);
@@ -70,9 +70,9 @@ class AuthMiddleware implements MiddlewareInterface
             throw new ValidateException(ExceptionMsg::ERR_AUTHORIZE);
         }
 
-        /** 权限校验 */
+        /** 用户权限校验 */
         if (!in_array($path, \config('app.allow_menu'))) {
-
+            //TODO未实现
         }
 
         return $handler->handle($request);
