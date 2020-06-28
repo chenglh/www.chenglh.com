@@ -37,9 +37,7 @@ class AccessTokenDao
             ['access_mid'=>$data['access_mid'],'access_login_type'=>$data['access_login_type']],
 			[
 				'access_token'=>$data['access_token'],
-				'access_login_ip'=>$data['access_login_ip'],
-				'create_at'=>date('Y-m-d H:i:s'),
-				'update_at'=>date('Y-m-d H:i:s')
+				'access_login_ip'=>$data['access_login_ip']
 			]
         );
     }

@@ -69,7 +69,6 @@ class AuthMiddleware implements MiddlewareInterface
 
             /** 挂载到Request请求对象*/
             $request->user = $manager;
-            print_r($request->user);
         } catch (\Exception $e) {
             throw new ValidateException(Message::ERR_AUTHORIZE);
         }
