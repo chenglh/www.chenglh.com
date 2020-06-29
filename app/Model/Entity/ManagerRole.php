@@ -58,20 +58,20 @@ class ManagerRole extends Model
     /**
      * 登录时间
      *
-     * @Column(name="create_at", prop="createAt")
+     * @Column(name="created_at", prop="createdAt")
      *
      * @var string
      */
-    private $createAt;
+    private $createdAt;
 
     /**
      * 更新时间
      *
-     * @Column(name="update_at", prop="updateAt")
+     * @Column(name="updated_at", prop="updatedAt")
      *
      * @var string
      */
-    private $updateAt;
+    private $updatedAt;
 
 
     /**
@@ -123,25 +123,25 @@ class ManagerRole extends Model
     }
 
     /**
-     * @param string $createAt
+     * @param string $createdAt
      *
      * @return self
      */
-    public function setCreateAt(string $createAt): self
+    public function setCreatedAt(string $createdAt): self
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * @param string $updateAt
+     * @param string $updatedAt
      *
      * @return self
      */
-    public function setUpdateAt(string $updateAt): self
+    public function setUpdatedAt(string $updatedAt): self
     {
-        $this->updateAt = $updateAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -181,17 +181,17 @@ class ManagerRole extends Model
     /**
      * @return string
      */
-    public function getCreateAt(): ?string
+    public function getCreatedAt(): ?string
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
     /**
      * @return string
      */
-    public function getUpdateAt(): ?string
+    public function getUpdatedAt(): ?string
     {
-        return $this->updateAt;
+        return $this->updatedAt;
     }
 
 }
