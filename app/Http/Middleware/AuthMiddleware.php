@@ -13,7 +13,6 @@ use App\Constant\Message;
 use App\Model\Entity\Manager;
 use Firebase\JWT\JWT;
 use App\Model\Dao\ManagerDao;
-use App\Constant\ExceptionMsg;
 use Swoft\Http\Message\Request;
 use Swoft\Exception\SwoftException;
 use App\Exception\ValidateException;

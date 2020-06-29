@@ -1,11 +1,8 @@
 <?php declare(strict_types=1);
 /**
- * This file is part of Swoft.
- *
- * @link https://swoft.org
- * @document https://swoft.org/docs
- * @contact group@swoft.org
- * @license https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * 菜单管理
+ * @Author：chenglh
+ * @Time：2020-06-29
  */
 
 namespace App\Http\Controller\Manager;
@@ -13,6 +10,7 @@ namespace App\Http\Controller\Manager;
 use App\Http\Middleware\AuthMiddleware;
 use App\Model\Dao\ManagerRoleDao;
 use App\Model\Dao\MenuDao;
+use App\Model\Data\ManagerRoleData;
 use Swoft\Bean\Annotation\Mapping\Inject;
 use Swoft\Http\Message\Request;
 use Swoft\Http\Message\Response;
@@ -42,6 +40,12 @@ class MenuController
      */
     private $menuDao;
 
+	/**
+	 * @Inject()
+	 * @var ManagerRoleData
+	 */
+    private $managerRoleData;
+
     /**
      * 用户菜单列表
      * @RequestMapping(route="menu",method=RequestMethod::GET)
@@ -49,9 +53,16 @@ class MenuController
      */
     public function mlist(Request $request): array {
         if ($request->user->role_id != 1) { // 非管理员
-            $roles = $this->managerRoleDao->getRoleByRoleId($request->user->role_id);
-            $menu_ids = $roles->getRoleDesc();
+			//从数据层取数据
+
+            //$roles = $this->managerRoleDao->getRoleByRoleId($request->user->role_id);
+            //$menu_ids = $roles->getRoleDesc();
         }
+
+		//$roles = $this->managerRoleData->getRoleInfo($request->user->role_id);
+        echo "xxxx";
+		//print_r($roles);
+		echo "vvvv";
 
         //角色ID --> (角色)对应menu_ids   -->  具体的菜单
 
