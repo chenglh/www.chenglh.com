@@ -52,32 +52,14 @@ class MenuController
      * @return array
      */
     public function mlist(Request $request): array {
-        if ($request->user->role_id != 1) { // 非管理员
-			//从数据层取数据
+    	$role_id = $request->user->getRoleId();
+		if ($role_id != 1) { // 普通管理员
+			$roles = $this->managerRoleData->getRoleInfo($role_id);
+		} else { // 超级管理员
 
-            //$roles = $this->managerRoleDao->getRoleByRoleId($request->user->role_id);
-            //$menu_ids = $roles->getRoleDesc();
-        }
+		}
 
-		//$roles = $this->managerRoleData->getRoleInfo($request->user->role_id);
-        echo "xxxx";
-		//print_r($roles);
-		echo "vvvv";
-
-        //角色ID --> (角色)对应menu_ids   -->  具体的菜单
-
-        #管理员，全部
-
-        #非管理员，部分
-
-        //
-        ///当前角色下有什么菜单
-        //$menu_ids = $roles->getRoleMenu();
-
-        /** 菜单列表 */
-        //$this->menuDao->getMenu($role_id,$menu_ids);
-
-        return ['item0', 'item1'];
+		return ['item0', 'item1'];
     }
 
     /**

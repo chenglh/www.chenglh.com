@@ -60,11 +60,10 @@ class AuthMiddleware implements MiddlewareInterface
             $managerDao = \Swoft::getBean(ManagerDao::class);
             /** @var Manager $manager */
             $manager = $managerDao->getManagerById($auth->user->manager_id);
-            $manager = $manager->getArrayableAttributes();
 
 			/** @var $managerLogic ManagerLogic */
             $managerLogic = \Swoft::getBean(ManagerLogic::class);
-            $managerLogic->checkStatus($manager);
+            $managerLogic->checkStatus($manager->getArrayableAttributes());
 
             /** 挂载到Request请求对象*/
             $request->user = $manager;

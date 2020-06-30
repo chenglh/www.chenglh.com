@@ -73,7 +73,6 @@ class AccountController{
      */
     public function index(Request $request): array
     {
-        print_r($request);
         return [];
     }
 
