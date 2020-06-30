@@ -58,7 +58,7 @@ class MenuController
 		} else { // 超级管理员
 
 		}
-
+		$roles = $this->managerRoleData->getRoleInfo($role_id);
 		return ['item0', 'item1'];
     }
 

@@ -14,13 +14,20 @@ use Swoft\Bean\Annotation\Mapping\Bean;
  * Class ManagerRoleData
  * @Bean()
  */
-class ManagerRoleData
+class ManagerRoleData extends Repository
 {
 	/**
 	 * @param int $role_id
 	 * @return mixed
 	 */
 	public function getRoleInfo(int $role_id) {
-		return ;
+		$aa = $this->setModel(new ManagerRole())
+			->setTag("roleInfo")
+			->remeber($this->getTag() . ":" . $role_id, function () use ($role_id) {
+				return $this->getModel()::where('role_id', $role_id)->first();
+			});
+		print_r($aa);
+		var_dump($aa);
+		return $aa;
 	}
 }
