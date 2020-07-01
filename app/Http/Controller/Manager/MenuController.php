@@ -4,7 +4,6 @@
  * @Author：chenglh
  * @Time：2020-06-29
  */
-
 namespace App\Http\Controller\Manager;
 
 use App\Http\Middleware\AuthMiddleware;
@@ -52,13 +51,10 @@ class MenuController
      * @return array
      */
     public function mlist(Request $request): array {
-    	$role_id = $request->user->getRoleId();
-		if ($role_id != 1) { // 普通管理员
-			$roles = $this->managerRoleData->getRoleInfo($role_id);
-		} else { // 超级管理员
-
+		if ($request->user->getRoleId() != 1) { // 普通管理员
+			$manager_roles = $this->managerRoleData->getRoleInfo($request->user->getRoleId());
 		}
-		$roles = $this->managerRoleData->getRoleInfo($role_id);
+
 		return ['item0', 'item1'];
     }
 

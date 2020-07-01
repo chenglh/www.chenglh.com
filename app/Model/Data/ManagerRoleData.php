@@ -4,7 +4,6 @@
  * @Author：chenglh
  * @Time：2020-06-29
  */
-
 namespace App\Model\Data;
 
 use App\Model\Entity\ManagerRole;
@@ -21,12 +20,10 @@ class ManagerRoleData extends Repository
 	 * @return mixed
 	 */
 	public function getRoleInfo(int $role_id) {
-		$aa = $this->setModel(new ManagerRole())
-			->setTag("roleInfo")
+		return $this->setModel(new ManagerRole())
+			->setTag("managerRoleInfo")
 			->remeber($this->getTag() . ":" . $role_id, function () use ($role_id) {
 				return $this->getModel()::where('role_id', $role_id)->first();
 			});
-		print_r($aa);
-		return $aa;
 	}
 }
