@@ -10,6 +10,8 @@ use App\Http\Middleware\AuthMiddleware;
 use App\Model\Dao\ManagerRoleDao;
 use App\Model\Dao\MenuDao;
 use App\Model\Data\ManagerRoleData;
+use App\Model\Data\MenuData;
+use App\Model\Entity\ManagerRole;
 use Swoft\Bean\Annotation\Mapping\Inject;
 use Swoft\Http\Message\Request;
 use Swoft\Http\Message\Response;
@@ -39,6 +41,12 @@ class MenuController
      */
     private $menuDao;
 
+    /**
+     * @Inject()
+     * @var MenuData
+     */
+    private $menuData;
+
 	/**
 	 * @Inject()
 	 * @var ManagerRoleData
@@ -51,10 +59,17 @@ class MenuController
      * @return array
      */
     public function mlist(Request $request): array {
-		if ($request->user->getRoleId() != 1) { // 普通管理员
+		if ($request->user->getRoleId() != 1) {
+		    /** @var ManagerRole $manager_roles */
 			$manager_roles = $this->managerRoleData->getRoleInfo($request->user->getRoleId());
-		}
+			$manager_menu = $this->menuData->getManagerMenu($request->user->getRoleId(), $manager_roles->getRoleMenu());
+		} else {
+            $manager_menu = $this->menuData->getManagerMenu($request->user->getRoleId(), '');
+        }
+        //$manager_menu = ;
+        print_r($manager_menu);
 
+		//加工返回菜单
 		return ['item0', 'item1'];
     }
 

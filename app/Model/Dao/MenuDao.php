@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /**
- * MenuDao层
+ * Menu数据库层
  * @Author：chenglh
  * @Time：2020-06-17
  */

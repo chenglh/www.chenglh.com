@@ -8,8 +8,19 @@ use Swoft\Redis\Redis;
  */
 class Repository
 {
-	protected $ttl = 10;
+    /**
+     * @var int 缓存时长(单位：秒)
+     */
+	protected $ttl = 60;
+
+    /**
+     * @var mixed 实体对象
+     */
 	protected $model;
+
+    /**
+     * @var string 缓存key
+     */
 	protected $tag;
 
 	public function getTtl()
