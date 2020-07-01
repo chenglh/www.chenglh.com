@@ -27,7 +27,6 @@ class ManagerRoleData extends Repository
 				return $this->getModel()::where('role_id', $role_id)->first();
 			});
 		print_r($aa);
-		var_dump($aa);
 		return $aa;
 	}
 }

@@ -7,15 +7,16 @@
 namespace App\Http\Controller\Manager;
 
 use App\Utils\Message;
+use Swoft\Http\Message\Request;
+use Swoft\Http\Message\Response;
 use App\Model\Dao\AccessTokenDao;
 use App\Model\Logic\ManagerLogic;
 use App\Model\Service\ManagerService;
 use Swoft\Bean\Annotation\Mapping\Inject;
+use Swoft\Validator\Annotation\Mapping\Validate;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
-use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
 use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
-use Swoft\Http\Message\Request;
-use Swoft\Http\Message\Response;
+use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
 
 /**
  * Class AccountController
@@ -45,6 +46,7 @@ class AccountController{
 	/**
      * 用户登录
 	 * @RequestMapping(route="/v1/login")
+     * @Validate(validator="login")
 	 * @return array
 	 */
 	public function login(Request $request, Response $response): array

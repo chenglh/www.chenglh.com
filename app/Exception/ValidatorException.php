@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 /**
  * +----------------------------------------------------------------------
- * | 业务逻辑异常处理
+ * | 验证器异常处理
  * +----------------------------------------------------------------------
  * | Copyright (c) 2020 http://www.chenglh.com All rights reserved.
  * +----------------------------------------------------------------------
@@ -12,8 +12,8 @@
 
 namespace App\Exception;
 
-use Exception;
 
-class ServiceException extends Exception
+class ValidatorException extends \Exception
 {
+
 }
