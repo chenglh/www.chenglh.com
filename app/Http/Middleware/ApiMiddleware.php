@@ -48,7 +48,7 @@ class ApiMiddleware implements MiddlewareInterface
 	private function configResponse(ResponseInterface $response)
 	{
 		return $response
-			->withHeader('Access-Control-Allow-Origin', 'http://www.tladmin.com')
+			->withHeader('Access-Control-Allow-Origin', 'http://www.ltadmin.com')
 			->withHeader('Access-Control-Allow-Headers', 'Access_token,X-Requested-With, Content-Type, Accept, Origin, Authorization')
 			->withHeader("Access-Control-Allow-Credentials", "true")
 			->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');

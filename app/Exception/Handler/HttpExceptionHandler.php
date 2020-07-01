@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 /**
- * This file is part of Swoft.
- *
- * @link     https://swoft.org
- * @document https://swoft.org/docs
- * @contact  group@swoft.org
- * @license  https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * +----------------------------------------------------------------------
+ * | Http异常类接管
+ * +----------------------------------------------------------------------
+ * | Date：2020-07-01 14:43:56
+ * | Author: chenglh
+ * +----------------------------------------------------------------------
  */
 namespace App\Exception\Handler;
 
@@ -32,11 +32,11 @@ class HttpExceptionHandler extends AbstractHttpErrorHandler
     public function handle(Throwable $e, Response $response): Response
     {
         return $response
-            ->withHeader('Access-Control-Allow-Origin', \config('app.website'))
+            ->withHeader('Access-Control-Allow-Origin', 'http://www.ltadmin.com')
             ->withHeader('Access-Control-Allow-Headers', 'Access_token,X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader("Access-Control-Allow-Credentials", "true")
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
             ->withContentType(ContentType::JSON)
-            ->withData(Message::success($e->getMessage()));
+            ->withData(Message::error($e->getMessage()));
     }
 }

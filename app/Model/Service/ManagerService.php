@@ -66,7 +66,7 @@ class ManagerService
 		if (!$manager) {
 			setErrorValiCount(getRemoteAddrPart(), 1200);
 			throw new ServiceException(Message::ERR_NOTREGISTE);
-		}echo getHashPassword($password, $manager->getPasswordSalt());
+		}
 		if ($manager->getPassword() != getHashPassword($password, $manager->getPasswordSalt())) {
 			setErrorValiCount(getRemoteAddrPart(), 1200);
 			throw new ServiceException(Message::ERR_PASSWORD);

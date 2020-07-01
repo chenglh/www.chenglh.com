@@ -45,7 +45,7 @@ class AccountController{
 
 	/**
      * 用户登录
-	 * @RequestMapping(route="/v1/login")
+	 * @RequestMapping(route="/v1/login",method={RequestMethod::POST})
      * @Validate(validator="login")
 	 * @return array
 	 */
