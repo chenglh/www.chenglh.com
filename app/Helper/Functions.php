@@ -146,9 +146,25 @@ function cacheRemeber($name, $value = '', $options = null) {
 }
 
 /**
+ * 实体转下转线
+ * @param $uncamelized
+ * @return array
+ */
+function attributes($uncamelized) {
+    $attributes = [];
+    foreach ($uncamelized as $key => $value) {
+        [$pro, $value] = uncamelize($key);
+        if ($pro !== false) {
+            $attributes[$pro] = $value;
+        }
+    }
+    return $attributes;
+}
+
+/**
  * 下划线转驼峰
- * step1.原字符串转小写,原字符串中的分隔符用空格替换,在字符串开头加上分隔符
- * step2.将字符串中每个单词的首字母转换为大写,再去空格,去字符串首部附加的分隔符.
+ * 1.原字符串转小写,原字符串中的分隔符用空格替换,在字符串开头加上分隔符
+ * 2.将字符串中每个单词的首字母转换为大写,再去空格,去字符串首部附加的分隔符.
  */
 function camelize($uncamelized_words,$separator='_')
 {
