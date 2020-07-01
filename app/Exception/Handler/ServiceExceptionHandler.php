@@ -32,7 +32,7 @@ class ServiceExceptionHandler extends AbstractHttpErrorHandler
 	public function handle(Throwable $e, Response $response): Response
 	{
 		return $response
-			->withHeader('Access-Control-Allow-Origin', 'http://www.ltadmin.com')
+			->withHeader('Access-Control-Allow-Origin', config('app.website'))
 			->withHeader('Access-Control-Allow-Headers', 'Access_token,X-Requested-With, Content-Type, Accept, Origin, Authorization')
 			->withHeader("Access-Control-Allow-Credentials", "true")
 			->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
