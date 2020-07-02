@@ -184,6 +184,11 @@ function uncamelize($camelCaps,$separator='_')
     return strtolower(preg_replace('/([a-z])([A-Z])/', "$1" . $separator . "$2", $camelCaps));
 }
 
+/**
+ * @param $data
+ * @param int $menu_pid
+ * @return array
+ */
 function getTree($data, $menu_pid = 0)
 {
     $tree=[];
