@@ -14,11 +14,6 @@ class Repository
 	protected $ttl = 60;
 
     /**
-     * @var mixed 实体对象
-     */
-	protected $model;
-
-    /**
      * @var string 缓存key
      */
 	protected $tag;
@@ -34,17 +29,6 @@ class Repository
 		return $this;
 	}
 
-	public function setModel($model)
-	{
-		$this->model = $model;
-		return $this;
-	}
-
-	public function getModel()
-	{
-		return $this->model;
-	}
-
 	public function setTag($tag)
 	{
 		$this->tag = $tag;
@@ -56,23 +40,17 @@ class Repository
 		return $this->tag;
 	}
 
-	public function findById($id)
-	{
-		return $this->remeber($this->getTag() . ":" . $id, function () use ($id) {
-			return $this->getModel()::find($id);
-		});
-	}
-
-	public function remeber($key,\Closure $entity)
+	public function remeber($key, \Closure $function)
 	{
 		$redis = Redis::connection("redis1.pool");
 		$value = $redis->get($key);
 		if (empty($value)) {
-			$value = $entity();
+            $value = json_encode($function());
 			if (!empty($value)) {
 				$redis->set($key, $value, $this->getTtl());
 			}
 		}
-		return $value;
+
+		return json_decode($value,true);
 	}
 }

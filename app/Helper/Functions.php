@@ -146,16 +146,19 @@ function cacheRemeber($name, $value = '', $options = null) {
 }
 
 /**
- * 实体转下转线
- * @param $uncamelized
+ * 实体转下转线(只支持一维或二维)
+ * @param $transform
  * @return array
  */
-function attributes($uncamelized) {
+function attributes(array $transform) {
     $attributes = [];
-    foreach ($uncamelized as $key => $value) {
-        [$pro, $value] = uncamelize($key);
-        if ($pro !== false) {
-            $attributes[$pro] = $value;
+    foreach ($transform as $key => $value) {
+        if (is_array($value)) {
+            foreach ($value as $kk => $vv) {
+                $attributes[$key][uncamelize($kk)] = $vv;
+            }
+        } else {
+            $attributes[uncamelize($key)] = $value;
         }
     }
     return $attributes;
@@ -179,6 +182,19 @@ function camelize($uncamelized_words,$separator='_')
 function uncamelize($camelCaps,$separator='_')
 {
     return strtolower(preg_replace('/([a-z])([A-Z])/', "$1" . $separator . "$2", $camelCaps));
+}
+
+function getTree($data, $menu_pid = 0)
+{
+    $tree=[];
+    foreach($data as $key => $value) {
+        if($value['menu_pid'] == $menu_pid) {
+            $tree[$value['menu_id']] = $value;
+            unset($data[$key]);
+            $tree[$value['menu_id']]['child'] = getTree($data, $value['menu_id']);
+        }
+    }
+    return $tree;
 }
 
 /** 实现业务级别 */

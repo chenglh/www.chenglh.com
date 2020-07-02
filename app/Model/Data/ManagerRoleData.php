@@ -20,10 +20,9 @@ class ManagerRoleData extends Repository
 	 * @return mixed
 	 */
 	public function getRoleInfo(int $role_id) {
-		return $this->setModel(new ManagerRole())
-			->setTag("managerRoleInfo")
+		return $this->setTag("managerRoleInfo")
 			->remeber($this->getTag() . ":" . $role_id, function () use ($role_id) {
-				return $this->getModel()::where('role_id', $role_id)->first();
+                return ManagerRole::where('role_id', $role_id)->first()->getArrayableAttributes();
 			});
 	}
 }

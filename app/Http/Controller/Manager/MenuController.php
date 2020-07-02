@@ -62,12 +62,15 @@ class MenuController
 		if ($request->user->getRoleId() != 1) {
 		    /** @var ManagerRole $manager_roles */
 			$manager_roles = $this->managerRoleData->getRoleInfo($request->user->getRoleId());
-			$manager_menu = $this->menuData->getManagerMenu($request->user->getRoleId(), $manager_roles->getRoleMenu());
+			$manager_menu = $this->menuData->getManagerMenu($request->user->getRoleId(), $manager_roles['role_menu']);
 		} else {
             $manager_menu = $this->menuData->getManagerMenu($request->user->getRoleId(), '');
         }
-        //$manager_menu = ;
-        print_r($manager_menu);
+
+        $menu_list = $this->menuData->getManagerMenuList($manager_menu);
+
+//$aa = $this->menuData->getManagerMenuList();
+//print_r($manager_menu);
 
 		//加工返回菜单
 		return ['item0', 'item1'];
