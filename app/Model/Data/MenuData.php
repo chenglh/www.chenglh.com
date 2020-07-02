@@ -24,6 +24,7 @@ class MenuData extends Repository
      */
     public function getManagerMenu($role_id, $role_menu) {
         return $this->setTag("menuInfo")
+			->setTtl(120)
             ->remeber($this->getTag() . ":" . $role_id, function () use ($role_id, $role_menu) {
                 if ($role_id == 1) {
                     $menuList = ManagerMenu::orderByRaw('menu_pid asc,menu_sort asc')->get()->toArray();
@@ -40,15 +41,29 @@ class MenuData extends Repository
      * @return array
      */
     public function getManagerMenuList(array $menu_list) {
-        #找出顶级菜单
-        $parent = getTree($menu_list);
-        print_r($parent);
-//        foreach ($menu_list as ) {
-//            if ()
-//        }
-//
-//        $list = [];
+		$itemTree = [];
+        $tree_list = getTree($menu_list);
+        foreach ($tree_list as $key => $tree) {
+        	$children = [];
+            if ($tree['menu_hide'] == 1) {
+				continue; // 隐藏菜单
+			}
 
-//        return $list;
+			if ($tree['child']) foreach ($tree['child'] as $child) {
+            	if ($child['menu_hide'] == 0) {
+					$children[] = [
+						'title' => $child['menu_title'],
+						'jump'  => $child['menu_url']
+					];
+				}
+			}
+			$itemTree[] = [
+				'title' => $tree['menu_title'],
+				'icon'  => $tree['menu_icon'],
+				'list'  => $children
+			];
+        }
+
+        return $itemTree;
     }
 }

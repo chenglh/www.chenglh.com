@@ -185,6 +185,7 @@ function uncamelize($camelCaps,$separator='_')
 }
 
 /**
+ * 无限级分类
  * @param $data
  * @param int $menu_pid
  * @return array
@@ -193,7 +194,7 @@ function getTree($data, $menu_pid = 0)
 {
     $tree=[];
     foreach($data as $key => $value) {
-        if($value['menu_pid'] == $menu_pid) {
+        if ($value['menu_pid'] == $menu_pid) {
             $tree[$value['menu_id']] = $value;
             unset($data[$key]);
             $tree[$value['menu_id']]['child'] = getTree($data, $value['menu_id']);
