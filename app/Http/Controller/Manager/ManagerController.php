@@ -1,35 +1,42 @@
 <?php declare(strict_types=1);
 /**
- * This file is part of Swoft.
- *
- * @link https://swoft.org
- * @document https://swoft.org/docs
- * @contact group@swoft.org
- * @license https://github.com/swoft-cloud/swoft/blob/master/LICENSE
+ * 管理员中心
+ * @Author：chenglh
+ * @Time：2020-07-03
  */
-
 namespace App\Http\Controller\Manager;
 
+use Swoft\Bean\Annotation\Mapping\Inject;
+use Swoft\Http\Message\Request;
+use Swoft\Http\Message\Response;
+use App\Model\Logic\ManagerLogic;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
 use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
 use Swoft\Http\Server\Annotation\Mapping\RequestMethod;
-use Swoft\Http\Message\Request;
-use Swoft\Http\Message\Response;
 
 /**
  * Class ManagersController
  *
- * @Controller(prefix="/manager")
+ * @Controller(prefix="/v1")
  * @package App\Http\Controller\Manager
  */
 class ManagerController{
     /**
-     * Get data list. access uri path: /manager
-     * @RequestMapping(route="/manager", method=RequestMethod::GET)
+     * @Inject()
+     * @var ManagerLogic
+     */
+    private $managerLogic;
+
+    /**
+     * 管理员列表
+     * @RequestMapping(route="manager", method={RequestMethod::POST})
      * @return array
      */
-    public function index(): array
+    public function index(Request $request): array
     {
+        print_r($request->getHeaders());
+        $where = $this->managerLogic->form($request->post());
+
         return ['item0', 'item1'];
     }
 

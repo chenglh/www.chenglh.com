@@ -29,6 +29,31 @@ class ManagerLogic
 		}
 	}
 
+    /**
+     * 搜索条件
+     * @param array $post
+     * @return array
+     */
+	public function form(array $post) {
+        $where = [];
+//        $telphone = trim($post['telphone']);
+//
+//        if (!is_numeric($telphone)) {
+////            throw new ValidateException('vvvasfdasdf');
+//        }
+
+//        if ($loginname) {
+//            //array_push($where, ['manager_name', 'LIKE', sprintf('%%s%', trim$post['loginname'])]);
+//        }
+//        if ($post['telphone']) {
+//            //$where['manager_mobile'] = ;
+//        }
+//        if (in_array($post['state'],[1, 2])) {
+//            //$where['login_status'] = $post['state'];
+//        }
+//        return $where;
+    }
+
 	/**
 	 * 检查账号是否正常
 	 * @param array $data

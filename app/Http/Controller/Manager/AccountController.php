@@ -69,52 +69,11 @@ class AccountController{
     }
 
     /**
-     * Get data list. access uri path: /account
-     * @RequestMapping(route="/account", method=RequestMethod::GET)
+     * 修改密码
+     * @RequestMapping(route="/v1/resetpwd")
      * @return array
      */
-    public function index(Request $request): array
-    {
-        return [];
-    }
-
-    /**
-     * Get one by ID. access uri path: /account/{id}
-     * @RequestMapping(route="{id}", method=RequestMethod::GET)
-     * @return array
-     */
-    public function get(): array
-    {
-        return ['item0'];
-    }
-
-    /**
-     * Create a new record. access uri path: /account
-     * @RequestMapping(route="/account", method=RequestMethod::POST)
-     * @return array
-     */
-    public function post(): array
-    {
-        return ['id' => 2];
-    }
-
-    /**
-     * Update one by ID. access uri path: /account/{id}
-     * @RequestMapping(route="{id}", method=RequestMethod::PUT)
-     * @return array
-     */
-    public function put(): array
-    {
-        return ['id' => 1];
-    }
-
-    /**
-     * Delete one by ID. access uri path: /account/{id}
-     * @RequestMapping(route="{id}", method=RequestMethod::DELETE)
-     * @return array
-     */
-    public function del(): array
-    {
-        return ['id' => 1];
+    public function resetpwd() {
+        return [1,2,3];
     }
 }
